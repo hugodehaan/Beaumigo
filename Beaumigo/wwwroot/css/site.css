@@ -1,1 +1,25 @@
-﻿
+﻿footer {
+    color: #000;
+    background: #757573;
+}
+
+    footer::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+
+.instagram {
+    float: right;
+    margin-right: 700px;
+}
+
+.facebook {
+    float: left;
+    margin-left: 50px;
+}
+
+footer h2 {
+    margin-left: 50px;
+}
