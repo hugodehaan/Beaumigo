@@ -23,10 +23,28 @@ namespace Beaumigo.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Route("eten")]
+        public IActionResult Eten()
         {
             return View();
         }
+
+        [Route("contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [Route("locatie")]
+        public IActionResult Locatie()
+        {
+            return View();
+        }
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
