@@ -1,4 +1,5 @@
 ﻿using Beaumigo.Models;
+using MySql.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
