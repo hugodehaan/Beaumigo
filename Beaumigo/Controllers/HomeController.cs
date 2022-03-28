@@ -22,16 +22,18 @@ namespace Beaumigo.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var locaties = GetLocaties(); 
+
+            return View(locaties);
         }
 
-        public List<Product> GetProducts()
+        public List<Locaties> GetLocaties()
         {
             // stel in waar de database gevonden kan worden
             string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
 
             // maak een lege lijst waar we de namen in gaan opslaan
-            List<Product> products = new List<Product>();
+            List<Locaties> locaties = new List<Locaties>();
 
             // verbinding maken met de database
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -40,7 +42,7 @@ namespace Beaumigo.Controllers
                 conn.Open();
 
                 // SQL query die we willen uitvoeren
-                MySqlCommand cmd = new MySqlCommand("select * from product", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from locaties", conn);
 
                 // resultaat van de query lezen
                 using (var reader = cmd.ExecuteReader())
@@ -48,7 +50,7 @@ namespace Beaumigo.Controllers
                     // elke keer een regel (of eigenlijk: database rij) lezen
                     while (reader.Read())
                     {
-                        Product p = new Product
+                        Locaties l = new Locaties
                         {
                             // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
                             Id = Convert.ToInt32(reader["Id"]),                            
@@ -56,13 +58,13 @@ namespace Beaumigo.Controllers
                         };
 
                         // voeg de naam toe aan de lijst met namen
-                        products.Add(p);
+                        locaties.Add(l);
                     }
                 }
             }
 
             // return de lijst met namen
-            return products;
+            return locaties;
         }
 
 
