@@ -22,8 +22,6 @@ namespace Beaumigo.Controllers
 
         public IActionResult Index()
         {
-           // var locaties = GetLocaties(); 
-
             return View();
         }
 
@@ -84,7 +82,9 @@ namespace Beaumigo.Controllers
         [Route("locatie")]
         public IActionResult Locatie()
         {
-            return View();
+            var locaties = GetLocaties();
+
+            return View(locaties); 
         }
 
         [Route("login")]
