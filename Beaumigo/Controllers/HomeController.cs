@@ -22,9 +22,9 @@ namespace Beaumigo.Controllers
 
         public IActionResult Index()
         {
-            var locaties = GetLocaties(); 
+           // var locaties = GetLocaties(); 
 
-            return View(locaties);
+            return View();
         }
 
         public List<string> GetLocaties()
@@ -58,7 +58,7 @@ namespace Beaumigo.Controllers
                         
 
                         // voeg de naam toe aan de lijst met namen
-                        locaties.Add(adres);
+                        locaties.Add(straatnummer);
                     }
                 }
             }
@@ -68,23 +68,25 @@ namespace Beaumigo.Controllers
         }
 
 
-        [Route("Eten")]
+        [Route("eten")]
         public IActionResult Eten()
         {
             return View();
         }
 
-        [Route("Contact")]
+        [Route("contact")]
         public IActionResult Contact()
         {
             return View();
         }
-        [Route("Locatie")]
+
+        [Route("locatie")]
         public IActionResult Locatie()
         {
             return View();
         }
-        [Route("Login")]
+
+        [Route("login")]
         public IActionResult Login()
         {
             return View();
