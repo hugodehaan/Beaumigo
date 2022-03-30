@@ -28,8 +28,8 @@ namespace Beaumigo.Controllers
         public List<string> GetLocaties()
         {
             // stel in waar de database gevonden kan worden
-            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            //string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
 
             // maak een lege lijst waar we de namen in gaan opslaan
             List<string> locaties = new List<string>();
@@ -53,11 +53,14 @@ namespace Beaumigo.Controllers
 
                         // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"                           
                         string straatnummer = reader["straatnummer"].ToString();
+                        string postcode = reader["postcode"].ToString();
+                        string telefoonnummer = reader["telefoonnummer"].ToString();
 
-                        
 
                         // voeg de naam toe aan de lijst met namen
                         locaties.Add(straatnummer);
+                        locaties.Add(postcode);
+                        locaties.Add(telefoonnummer);
                     }
                 }
             }
