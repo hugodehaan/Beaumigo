@@ -27,13 +27,13 @@ namespace Beaumigo.Controllers
             return View(locaties);
         }
 
-        public List<Locaties> GetLocaties()
+        public List<string> GetLocaties()
         {
             // stel in waar de database gevonden kan worden
             string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
 
             // maak een lege lijst waar we de namen in gaan opslaan
-            List<Locaties> locaties = new List<Locaties>();
+            List<string> locaties = new List<string>();
 
             // verbinding maken met de database
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -50,15 +50,15 @@ namespace Beaumigo.Controllers
                     // elke keer een regel (of eigenlijk: database rij) lezen
                     while (reader.Read())
                     {
-                        Locaties l = new Locaties
-                        {
-                            // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
-                            Id = Convert.ToInt32(reader["Id"]),                            
-                            Naam = reader["Naam"].ToString(),
-                        };
+
+
+                        // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"                           
+                        string straatnummer = reader["adres"].ToString();
+
+                        
 
                         // voeg de naam toe aan de lijst met namen
-                        locaties.Add(l);
+                        locaties.Add(adres);
                     }
                 }
             }
