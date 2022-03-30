@@ -94,11 +94,6 @@ namespace Beaumigo.Controllers
         }
 
 
-        public IActionResult ETEN()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
