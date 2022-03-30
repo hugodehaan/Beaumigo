@@ -68,23 +68,23 @@ namespace Beaumigo.Controllers
         }
 
 
-        [Route("eten")]
+        [Route("Eten")]
         public IActionResult Eten()
         {
             return View();
         }
 
-        [Route("contact")]
+        [Route("Contact")]
         public IActionResult Contact()
         {
             return View();
         }
-        [Route("locatie")]
+        [Route("Locatie")]
         public IActionResult Locatie()
         {
             return View();
         }
-        [Route("login")]
+        [Route("Login")]
         public IActionResult Login()
         {
             return View();
