@@ -1,4 +1,5 @@
 ﻿using Beaumigo.Models;
+using MySql.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace Beaumigo.Controllers
 {
@@ -20,13 +22,74 @@ namespace Beaumigo.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var locaties = GetLocaties(); 
+
+            return View(locaties);
         }
 
-        public IActionResult Privacy()
+        public List<Locaties> GetLocaties()
+        {
+            // stel in waar de database gevonden kan worden
+            string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+
+            // maak een lege lijst waar we de namen in gaan opslaan
+            List<Locaties> locaties = new List<Locaties>();
+
+            // verbinding maken met de database
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                // verbinding openen
+                conn.Open();
+
+                // SQL query die we willen uitvoeren
+                MySqlCommand cmd = new MySqlCommand("select * from locaties", conn);
+
+                // resultaat van de query lezen
+                using (var reader = cmd.ExecuteReader())
+                {
+                    // elke keer een regel (of eigenlijk: database rij) lezen
+                    while (reader.Read())
+                    {
+                        Locaties l = new Locaties
+                        {
+                            // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
+                            Id = Convert.ToInt32(reader["Id"]),                            
+                            Naam = reader["Naam"].ToString(),
+                        };
+
+                        // voeg de naam toe aan de lijst met namen
+                        locaties.Add(l);
+                    }
+                }
+            }
+
+            // return de lijst met namen
+            return locaties;
+        }
+
+
+        [Route("eten")]
+        public IActionResult Eten()
         {
             return View();
         }
+
+        [Route("contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [Route("locatie")]
+        public IActionResult Locatie()
+        {
+            return View();
+        }
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
 
         public IActionResult ETEN()
         {
