@@ -1,14 +1,12 @@
-﻿
-
-footer {
+﻿footer {
     color: #000;
     background: #757573;
 }
 
-    footer::after {
-        content: '';
-        display: table;
-        clear: both;
+   footer::after {
+       content: '';
+       display: table;
+       clear: both;
     }
 
 
