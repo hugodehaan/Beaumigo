@@ -28,8 +28,8 @@ namespace Beaumigo.Controllers
         public List<string> GetLocaties()
         {
             // stel in waar de database gevonden kan worden
-            string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-            //string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
 
             // maak een lege lijst waar we de namen in gaan opslaan
             List<string> locaties = new List<string>();
@@ -92,6 +92,12 @@ namespace Beaumigo.Controllers
 
         [Route("login")]
         public IActionResult Login()
+        {
+            return View();
+        }
+
+        [Route("404")]
+        public IActionResult Foutpagina()
         {
             return View();
         }
