@@ -3,6 +3,14 @@
     min-width: 100%;
 }
 
+//  {
+    background-size: cover;
+    background-position: left;
+    padding: 50px;
+    margin: 0px;
+    font-family: monospace;
+}
+
 .nav ul{
     margin: 0;
     padding: 0;
@@ -11,7 +19,7 @@
 
 .nav li {
     display: inline-block;
-    margin-left: 70px;
+    margin-left: 100px;
     margin-right: 10px;
     padding-top: 23px;
     position: relative;
