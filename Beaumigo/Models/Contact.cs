@@ -6,11 +6,11 @@ namespace Beaumigo.Models
     {
         public int Id { get; set; }
 
-        public string straatnummer { get; set; }
+        public string naam { get; set; }
 
-        public string postcode { get; set; }
+        public string email { get; set; }
 
-        public string telefoonnummer { get; set; }
+        public string telefoon { get; set; }
 
 
     }
