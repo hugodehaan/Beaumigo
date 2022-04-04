@@ -74,7 +74,55 @@ namespace Beaumigo.Controllers
         [Route("eten")]
         public IActionResult Eten()
         {
-            return View();
+            var Eten = GetEten();
+
+            return View(Eten);
+        }
+
+        public List<Eten> GetEten()
+        {
+            // stel in waar de database gevonden kan worden
+            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+
+            // maak een lege lijst waar we de namen in gaan opslaan
+            List<Eten> Eten = new List<Eten>();
+
+            // verbinding maken met de database
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                // verbinding openen
+                conn.Open();
+
+                // SQL query die we willen uitvoeren
+                MySqlCommand cmd = new MySqlCommand("select * from locaties", conn);
+
+                // resultaat van de query lezen
+                using (var reader = cmd.ExecuteReader())
+                {
+                    // elke keer een regel (of eigenlijk: database rij) lezen
+                    while (reader.Read())
+                    {
+                        Eten e = new Eten
+
+                        {
+                            // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
+                            Id = Convert.ToInt32(reader["Id"]),
+                            gang = reader["gang"].ToString(),
+                            ingredienten = reader["ingredienten"].ToString(),
+                            allergieen = reader["allergieen"].ToString(),
+                            naam = reader["naam"].ToString(),
+
+                        };
+
+                        // voeg de naam toe aan de lijst met namen
+                        Eten.Add(e);
+                    }
+                }
+            }
+
+            // return de lijst met namen
+            return Eten;
         }
 
         [Route("contact")]
