@@ -1,6 +1,13 @@
-﻿@{
+﻿@model List<Eten>
+@{
     ViewData["Title"] = "Eten";
 }
+<div class="text-center">
+    <h1> Eten</h1>
+    @foreach (Eten e in Model)
+    {
+        <p>@e.naam - @e.gang - @e.ingredienten - @e.allergieen.</p>
 
+    }
+</div>
 
-<p>hoi</p>

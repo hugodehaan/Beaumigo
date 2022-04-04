@@ -1,6 +1,12 @@
-﻿@{
-    ViewData["Title"] = "CONTACT";
+﻿@model List<Contact>
+@{
+    ViewData["Title"] = "Contact";
 }
+<div class="text-center">
+    <h1> Contact</h1>
+    @foreach (Contact c in Model)
+    {
+        <p>@c.naam - @c.email - @c.telefoon.</p>
 
-
-
+    }
+</div>
