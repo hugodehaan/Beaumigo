@@ -25,14 +25,14 @@ namespace Beaumigo.Controllers
             return View();
         }
 
-        public List<string> GetLocaties()
+        public List<Locatie> GetLocaties()
         {
             // stel in waar de database gevonden kan worden
-            string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-            //string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
 
             // maak een lege lijst waar we de namen in gaan opslaan
-            List<string> locaties = new List<string>();
+            List<Locatie> locaties = new List<Locatie>();
 
             // verbinding maken met de database
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -49,18 +49,19 @@ namespace Beaumigo.Controllers
                     // elke keer een regel (of eigenlijk: database rij) lezen
                     while (reader.Read())
                     {
+                        Locatie l = new Locatie
 
+                        {   
+                        // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
+                            Id = Convert.ToInt32(reader["Id"]),
+                            straatnummer = reader["straatnummer"].ToString(),
+                            postcode = reader["postcode"].ToString(),
+                            telefoonnummer = reader["Telefoonnummer"].ToString(),
+     
+                         };
 
-                        // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"                           
-                        string straatnummer = reader["straatnummer"].ToString();
-                        string postcode = reader["postcode"].ToString();
-                        string telefoonnummer = reader["telefoonnummer"].ToString();
-
-
-                        // voeg de naam toe aan de lijst met namen
-                        locaties.Add(straatnummer);
-                        locaties.Add(postcode);
-                        locaties.Add(telefoonnummer);
+                    // voeg de naam toe aan de lijst met namen
+                    locaties.Add(l);
                     }
                 }
             }
@@ -86,7 +87,7 @@ namespace Beaumigo.Controllers
         public IActionResult Locatie()
         {
             var locaties = GetLocaties();
-
+           
             return View(locaties); 
         }
 

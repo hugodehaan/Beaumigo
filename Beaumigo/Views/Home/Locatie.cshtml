@@ -1,12 +1,12 @@
-﻿@model List<string>
+﻿@model List<Locatie>
 @{
     ViewData["Title"] = "Locatie";
 }
 <div class="text-center">
     <h1> locaties</h1>
-    @foreach (string locaties in Model)
+    @foreach (Locatie l in Model)
     {
-        <p>@locaties</p>
+        <p>@l.straatnummer - @l.telefoonnummer - @l.postcode.</p>
        
 
     }
