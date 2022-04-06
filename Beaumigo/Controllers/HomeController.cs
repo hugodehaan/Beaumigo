@@ -14,6 +14,9 @@ namespace Beaumigo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        // stel in waar de database gevonden kan worden
+        //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+        string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -27,10 +30,6 @@ namespace Beaumigo.Controllers
 
         public List<Locatie> GetLocaties()
         {
-            // stel in waar de database gevonden kan worden
-            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-
             // maak een lege lijst waar we de namen in gaan opslaan
             List<Locatie> locaties = new List<Locatie>();
 
@@ -81,9 +80,7 @@ namespace Beaumigo.Controllers
 
         public List<Eten> GetEten()
         {
-            // stel in waar de database gevonden kan worden
-            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
+            
 
             // maak een lege lijst waar we de namen in gaan opslaan
             List<Eten> Eten = new List<Eten>();
@@ -95,7 +92,7 @@ namespace Beaumigo.Controllers
                 conn.Open();
 
                 // SQL query die we willen uitvoeren
-                MySqlCommand cmd = new MySqlCommand("select * from locaties", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from eten", conn);
 
                 // resultaat van de query lezen
                 using (var reader = cmd.ExecuteReader())
@@ -125,20 +122,9 @@ namespace Beaumigo.Controllers
             return Eten;
         }
 
-        [Route("contact")]
-        public IActionResult Contact()
-        {
-            var contacten = GetContacten();
-
-            return View();
-        }
 
         public List<Contact> GetContacten()
         {
-            // stel in waar de database gevonden kan worden
-            //string connectionString = "Server=172.16.160.21;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-            string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110368;Uid=110368;Pwd=inf2021sql;";
-
             // maak een lege lijst waar we de namen in gaan opslaan
             List<Contact> contacten = new List<Contact>();
 
@@ -149,7 +135,7 @@ namespace Beaumigo.Controllers
                 conn.Open();
 
                 // SQL query die we willen uitvoeren
-                MySqlCommand cmd = new MySqlCommand("select * from contacten", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from contact", conn);
 
                 // resultaat van de query lezen
                 using (var reader = cmd.ExecuteReader())
@@ -177,6 +163,15 @@ namespace Beaumigo.Controllers
             // return de lijst met namen
             return contacten;
         }
+
+
+        [Route("contact")]
+        public IActionResult Contact()
+        {
+            var contacten = GetContacten();
+
+            return View(contacten);
+        } 
 
         [Route("locatie")]
         public IActionResult Locatie()
