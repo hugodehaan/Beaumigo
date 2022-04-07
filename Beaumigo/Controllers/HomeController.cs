@@ -50,17 +50,17 @@ namespace Beaumigo.Controllers
                     {
                         Locatie l = new Locatie
 
-                        {   
-                        // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
+                        {
+                            // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
                             Id = Convert.ToInt32(reader["Id"]),
                             straatnummer = reader["straatnummer"].ToString(),
                             postcode = reader["postcode"].ToString(),
                             telefoonnummer = reader["Telefoonnummer"].ToString(),
-     
-                         };
 
-                    // voeg de naam toe aan de lijst met namen
-                    locaties.Add(l);
+                        };
+
+                        // voeg de naam toe aan de lijst met namen
+                        locaties.Add(l);
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace Beaumigo.Controllers
 
         public List<Eten> GetEten()
         {
-            
+
 
             // maak een lege lijst waar we de namen in gaan opslaan
             List<Eten> Eten = new List<Eten>();
@@ -171,25 +171,36 @@ namespace Beaumigo.Controllers
             var contacten = GetContacten();
 
             return View(contacten);
-        } 
+        }
 
         [Route("locatie")]
         public IActionResult Locatie()
         {
             var locaties = GetLocaties();
-           
-            return View(locaties); 
+
+            return View(locaties);
         }
 
         [Route("login")]
         public IActionResult Login()
         {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string voornaam, string achternaam)
+        {
+            ViewData["voornaam"] = voornaam;
+            ViewData["achternaam"] = achternaam;
+
             return View();
         }
 
         [Route("404")]
         public IActionResult Foutpagina()
         {
+
             return View();
         }
 
