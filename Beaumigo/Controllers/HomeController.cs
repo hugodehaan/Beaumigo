@@ -182,30 +182,13 @@ namespace Beaumigo.Controllers
         }
 
         [Route("login")]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login()
         {
-            // is er een wachtwoord ingevoerd?
-            if (!string.IsNullOrWhiteSpace(password))
-            {
-                Person p = GetPersonByEmail(email);
-
-                if (p == null)
-                    return View();
-
-                //Er is iets ingevoerd, nu kunnen we het wachtwoord hashen en vergelijken met de hash "uit de database"
-                string hashVanIngevoerdWachtwoord = ComputeSha256Hash(password);
-                if (hashVanIngevoerdWachtwoord == p.Wachtwoord)
-                {
-                    HttpContext.Session.SetString("User", p.Email);
-                    return Redirect("/");
-                }
-
-
-                return View();
-            }
-
             return View();
-        }
+        } 
+
+            
+        
 
         //  [HttpPost]
         //   public IActionResult Login(string voornaam, string achternaam)
@@ -259,22 +242,5 @@ namespace Beaumigo.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        static string ComputeSha256Hash(string rawData)
-        {
-            // Create a SHA256   
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
-
-                // Convert byte array to a string   
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
-        }
     }
 }
