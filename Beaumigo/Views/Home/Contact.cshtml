@@ -1,19 +1,39 @@
-﻿@model List<Contact>
-
+﻿@model Beaumigo.Models.Person 
 @{
-    ViewData["Title"] = "Contact";
-}
+        ViewData["Title"] = "Contact";
+ }
 
-<div class="text-center">
-    <h1> Contact</h1>
-    <p>vul hier ons contactformulier in</p>
-    <form method="post">
-    </form>
-    <p>Of bereik ons met de volgende gegevens</p>
+ <div class="text-center">
+   <h1> Contact</h1>
+   <p>vul hier ons contactformulier in</p>
+   <form method="post" class="contactform">
+       <div>
+           Voornaam: <input type="text" name="firstname" />
+           @Html.ValidationMessageFor(m => m.FirstName)
+       </div>
+       <div>
+           Achternaam: <input type="text" name="lastname" />
+           @Html.ValidationMessageFor(m => m.LastName)
+       </div>
+       <div>
+           E-mail: <input type="text" name="email" />
+           @Html.ValidationMessageFor(m => m.Email)
+       </div>
+       <div>
+           Telefoon: <input type="text" name="phone" />
+       </div>
+       <div>
+           Adres: <input type="text" name="address" />
+       </div>
+       <div>
+           Bericht: <input type="text" name="message" />
+           @Html.ValidationMessageFor(m => m.Message)
+       </div>
 
-    @foreach (Contact c in Model)
-    {
-        <p>@c.naam - @c.email - @c.telefoon.</p>
-
-    }
+       <input type="submit" value="opslaan" />
+   </form>
+     @if(Model!= null)
+     {
+         <p> Hallo @Model.FirstName die achternaam @Model.LastName heeft  </p>
+     }
 </div>

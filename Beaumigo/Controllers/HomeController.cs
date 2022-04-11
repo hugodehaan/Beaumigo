@@ -123,6 +123,7 @@ namespace Beaumigo.Controllers
         }
 
 
+
         public List<Contact> GetContacten()
         {
             // maak een lege lijst waar we de namen in gaan opslaan
@@ -168,9 +169,23 @@ namespace Beaumigo.Controllers
         [Route("contact")]
         public IActionResult Contact()
         {
-            var contacten = GetContacten();
+            //var contacten = GetContacten();
+            return View();
+        }
 
-            return View(contacten);
+
+        [HttpPost]
+        [Route("contact")]
+        public IActionResult contact(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                SavePerson(person);
+                return Redirect("/succes");
+            }
+
+
+            return View(person);
         }
 
         [Route("locatie")]
@@ -185,10 +200,35 @@ namespace Beaumigo.Controllers
         public IActionResult Login()
         {
             return View();
-        } 
-
-            
+        }
         
+        
+        [Route("succes")]
+        public IActionResult Succes()
+        {
+            return View();
+        }
+
+
+
+        private void SavePerson(Person person)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, adres, telefoon, bericht) VALUES(?voornaam, ?achternaam, ?email, ?telefoon, ?adres, ?bericht)", conn);
+
+                cmd.Parameters.Add("?voornaam", MySqlDbType.Text).Value = person.FirstName;
+                cmd.Parameters.Add("?achternaam", MySqlDbType.Text).Value = person.LastName;
+                cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
+                cmd.Parameters.Add("?telefoon", MySqlDbType.Text).Value = person.Phone;
+                cmd.Parameters.Add("?adres", MySqlDbType.Text).Value = person.Address;
+                cmd.Parameters.Add("?bericht", MySqlDbType.Text).Value = person.Message;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
 
         //  [HttpPost]
         //   public IActionResult Login(string voornaam, string achternaam)
@@ -198,40 +238,6 @@ namespace Beaumigo.Controllers
         //
         //      return View();
         // }
-        private Person GetPersonByEmail(string email)
-        {
-            List<Person> persons = new List<Person>();
-
-            // verbinding maken met de database
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                // verbinding openen
-                conn.Open();
-
-                // SQL query die we willen uitvoeren
-                MySqlCommand cmd = new MySqlCommand($"select * from klant where email = '{email}'", conn);
-
-                // resultaat van de query lezen
-                using (var reader = cmd.ExecuteReader())
-                {
-                    // elke keer een regel (of eigenlijk: database rij) lezen
-                    while (reader.Read())
-                    {
-                        Person p = new Person();
-                        p.Email = reader["email"].ToString();
-                        p.Wachtwoord = reader["wachtwoord"].ToString();
-
-
-
-                        // voeg de naam toe aan de lijst met namen
-                        persons.Add(p);
-                    }
-                }
-            }
-
-            // return de lijst met namen
-            return persons[0];
-        }
 
 
 
