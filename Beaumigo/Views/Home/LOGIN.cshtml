@@ -2,19 +2,14 @@
     ViewData["Title"] = "LOGIN";
 }
 
-<form method="post">
-    <div> Voornaam: <input type="text" name="firstname" /> </div>
-    @Html.ValidationMessageFor(m => m.FirstName)
-    <div> Achternaam: <input type="text" name="lastname" /> </div>
-    @Html.ValidationMessageFor(m => m.LastName)
-    <div> E-mail: <input type="text" name="email" /> </div>
-    @Html.ValidationMessageFor(m => m.Email)
-    <div> Wachtwoord: <input type="text" name="wachtwoord" /> </div>
-    @Html.ValidationMessageFor(m => m.Wachtwoord)
-    <div> Telefoon: <input type="text" name="phone" /> </div>
-    @Html.ValidationMessageFor(m => m.Telefoon)
-    <div> Adres: <input type="text" name="address" /> </div>
-    @Html.ValidationMessageFor(m => m.Adres)
 
-    <input type="submit" value="verstuur" />
-</form>
+<div class="simpleLogin">
+    <form>
+        <legend>Let's Login</legend>
+        <fieldset>
+            <input id="name" placeholder="email" name="email" type="text">
+            <input id="pass" placeholder="Password" name="password" type="password">
+            <input id="submit" type="submit" value="Log in">
+        </fieldset>
+    </form>
+</div>
