@@ -1,10 +1,16 @@
 ﻿@model List<Contact>
+@model List<klant>
 @{
     ViewData["Title"] = "Contact";
 }
 
 <div class="text-center">
     <h1> Contact</h1>
+    <p>vul hier ons contactformulier in</p>
+    <form method="post">
+    </form>
+    <p>Of bereik ons met de volgende gegevens</p>
+
     @foreach (Contact c in Model)
     {
         <p>@c.naam - @c.email - @c.telefoon.</p>
