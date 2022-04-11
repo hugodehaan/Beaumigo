@@ -252,13 +252,6 @@ namespace Beaumigo.Controllers
 
 
 
-        [Route("404")]
-        public IActionResult Foutpagina()
-        {
-
-            return View();
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
