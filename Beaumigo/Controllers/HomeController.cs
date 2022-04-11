@@ -182,20 +182,75 @@ namespace Beaumigo.Controllers
         }
 
         [Route("login")]
-        public IActionResult Login()
+        public IActionResult Login(string email, string password)
         {
+            // is er een wachtwoord ingevoerd?
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                Person p = GetPersonByEmail(email);
+
+                if (p == null)
+                    return View();
+
+                //Er is iets ingevoerd, nu kunnen we het wachtwoord hashen en vergelijken met de hash "uit de database"
+                string hashVanIngevoerdWachtwoord = ComputeSha256Hash(password);
+                if (hashVanIngevoerdWachtwoord == p.Wachtwoord)
+                {
+                    HttpContext.Session.SetString("User", p.Email);
+                    return Redirect("/");
+                }
+
+
+                return View();
+            }
 
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Login(string voornaam, string achternaam)
+      //  [HttpPost]
+     //   public IActionResult Login(string voornaam, string achternaam)
+      //  {
+       //     ViewData["voornaam"] = voornaam;
+       //     ViewData["achternaam"] = achternaam;
+//
+      //      return View();
+       // }
+        private Person GetPersonByEmail(string email)
         {
-            ViewData["voornaam"] = voornaam;
-            ViewData["achternaam"] = achternaam;
+            List<Person> persons = new List<Person>();
 
-            return View();
+            // verbinding maken met de database
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                // verbinding openen
+                conn.Open();
+
+                // SQL query die we willen uitvoeren
+                MySqlCommand cmd = new MySqlCommand($"select * from klant where email = '{email}'", conn);
+
+                // resultaat van de query lezen
+                using (var reader = cmd.ExecuteReader())
+                {
+                    // elke keer een regel (of eigenlijk: database rij) lezen
+                    while (reader.Read())
+                    {
+                        Person p = new Person();
+                        p.Email = reader["email"].ToString();
+                        p.Wachtwoord = reader["wachtwoord"].ToString();
+
+
+
+                        // voeg de naam toe aan de lijst met namen
+                        persons.Add(p);
+                    }
+                }
+            }
+
+            // return de lijst met namen
+            return persons[0];
         }
+
+
 
         [Route("404")]
         public IActionResult Foutpagina()
@@ -209,6 +264,23 @@ namespace Beaumigo.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+  
+    static string ComputeSha256Hash(string rawData)
+    {
+        // Create a SHA256   
+        using (SHA256 sha256Hash = SHA256.Create())
+        {
+            // ComputeHash - returns byte array  
+            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+            // Convert byte array to a string   
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
         }
     }
 }
