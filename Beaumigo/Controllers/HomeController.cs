@@ -78,6 +78,44 @@ namespace Beaumigo.Controllers
             return View(Eten);
         }
 
+        [Route("gerecht/{id}")]
+        public IActionResult Gerecht(string id)
+        {
+            var model = GetGerecht(id);
+            return View(model);
+        }
+
+        private Gerecht GetGerecht(string id)
+        {
+            List<Gerecht> festival = new List<Gerecht>();
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand($"select * from eten where id = {id}", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Gerecht g = new Gerecht
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Naam = reader["naam"].ToString(),
+                            Gang = reader["gang"].ToString(),
+                            Ingredienten = reader["ingredienten"].ToString(),
+                            Allergieen = reader["allergieen"].ToString(),
+
+
+                        };
+                        festival.Add(g);
+                    }
+                }
+            }
+
+            return festival[0];
+        }
+
         public List<Eten> GetEten()
         {
 
@@ -105,10 +143,10 @@ namespace Beaumigo.Controllers
                         {
                             // selecteer de kolommen die je wil lezen. In dit geval kiezen we de kolom "naam"
                             Id = Convert.ToInt32(reader["Id"]),
-                            gang = reader["gang"].ToString(),
-                            ingredienten = reader["ingredienten"].ToString(),
-                            allergieen = reader["allergieen"].ToString(),
-                            naam = reader["naam"].ToString(),
+                            Gang = reader["gang"].ToString(),
+                            Ingredienten = reader["ingredienten"].ToString(),
+                            Allergieen = reader["allergieen"].ToString(),
+                            Naam = reader["naam"].ToString(),
 
                         };
 

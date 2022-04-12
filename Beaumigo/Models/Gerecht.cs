@@ -2,7 +2,7 @@ using System;
 
 namespace Beaumigo.Models
 {
-    public class Eten
+    public class Gerecht
     {
         public int Id { get; set; }
 

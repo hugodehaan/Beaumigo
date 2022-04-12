@@ -2,12 +2,18 @@
 @{
     ViewData["Title"] = "Eten";
 }
-<div class="text-center">
-    <h1> Eten</h1>
-    @foreach (Eten e in Model)
-    {
-        <p>@e.naam - @e.gang - @e.ingredienten - @e.allergieen.</p>
+<div class="slideshow">
+    <ul>
+        @foreach (Eten g in Model)
+        {
+            <li>
+                <a class="goed" href="/gerecht/@g.Id">@g.Naam</a>
+                
 
-    }
+                <br />
+                <br />
+            </li>
+        }
+    </ul>
 </div>
 
