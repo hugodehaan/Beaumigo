@@ -11,6 +11,9 @@
     font-family: monospace;
 }
 
+.logo{
+    float: right;
+}
 .nav ul{
     margin: 0;
     padding: 0;
