@@ -105,6 +105,9 @@ namespace Beaumigo.Controllers
                             Gang = reader["gang"].ToString(),
                             Ingredienten = reader["ingredienten"].ToString(),
                             Allergieen = reader["allergieen"].ToString(),
+                            Prijs = reader["prijs"].ToString(),
+                            Foto = reader["foto"].ToString(),
+                            Beschrijving = reader["beschrijving"].ToString(),
 
 
                         };
@@ -147,6 +150,9 @@ namespace Beaumigo.Controllers
                             Ingredienten = reader["ingredienten"].ToString(),
                             Allergieen = reader["allergieen"].ToString(),
                             Naam = reader["naam"].ToString(),
+                            Prijs = reader["prijs"].ToString(),
+                            Foto = reader["foto"].ToString(),
+                            Beschrijving = reader["beschrijving"].ToString(),
 
                         };
 
