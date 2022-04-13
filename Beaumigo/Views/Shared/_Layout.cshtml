@@ -5,28 +5,25 @@
  </head>
  <body>
      <header>
-     <div class="page">
-         <div class="header">
-             <div class="logo">
-                 <img src="~/img/Studio_Project.png" alt="logo" width="150" heigt="150" />
-             </div>
-             <div class="nav">
-                 <ul>
-                     <li><a class="@ViewBag.Home" href="/">HOME</a></li>
-                     <li><a class="@ViewBag.Eten" href="/eten">ETEN</a></li>
-                     <li><a class="@ViewBag.Locatie" href="/locatie">LOCATIE</a></li>
-                     <li><a class="@ViewBag.Contact" href="/contact">CONTACT</a></li>
-                     <li><a class="@ViewBag.Login" href="/login">LOGIN</a></li>
-                 </ul>
+         <h1>BEAU<span>MIGO</span></h1>
+         <div class="nav">
+             <ul class="nav_links">
+                 <li><a class="@ViewBag.Home" href="/">HOME</a></li>
+                 <li><a class="@ViewBag.Eten" href="/eten">ETEN</a></li>
+                 <li><a class="@ViewBag.Locatie" href="/locatie">LOCATIE</a></li>
+                 <li><a class="@ViewBag.Contact" href="/contact">CONTACT</a></li>
+                 <li><a class="@ViewBag.Login" href="/login">LOGIN</a></li>
+             </ul>
 
-             </div>
          </div>
+     </header>
+         
          <div class="main">
              @RenderBody()
          </div>
 
-     </div>
-         </header>
+     
+
 
      <footer>
          <div class="footer">
