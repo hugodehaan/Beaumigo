@@ -4,36 +4,47 @@
  }
 
  <div class="text-center">
-   <h1> Contact</h1>
-   <p>vul hier ons contactformulier in</p>
+   <h1>Contactformulier</h1>
+   <p>Heeft u vragen voor ons. Dan kunt u ons contactformulier invullen</p>
    <form method="post" class="contactform">
-       <div>
-           Voornaam: <input type="text" name="firstname" />
-           @Html.ValidationMessageFor(m => m.FirstName)
-       </div>
-       <div>
-           Achternaam: <input type="text" name="lastname" />
-           @Html.ValidationMessageFor(m => m.LastName)
-       </div>
-       <div>
-           E-mail: <input type="text" name="email" />
-           @Html.ValidationMessageFor(m => m.Email)
-       </div>
-       <div>
-           Telefoon: <input type="text" name="phone" />
-       </div>
-       <div>
-           Adres: <input type="text" name="address" />
-       </div>
-       <div>
-           Bericht: <input type="text" name="message" />
-           @Html.ValidationMessageFor(m => m.Message)
-       </div>
+       <fieldset>
+           <legend>Vul hier uw gegevens en bericht in</legend>
+           <div>
+               Voornaam: <input type="text" name="firstname" />
+               @Html.ValidationMessageFor(m => m.FirstName)
+           </div>
+           <br />
+           <br />
+           <div>
+               Achternaam: <input type="text" name="lastname" />
+               @Html.ValidationMessageFor(m => m.LastName)
+           </div>
+           <br />
+           <br />
+           <div>
+               E-mail: <input type="text" name="email" />
+               @Html.ValidationMessageFor(m => m.Email)
+           </div>
+           <br />
+           <br />
+           <div>
+               Telefoon: <input type="text" name="phone" />
+           </div>
+           <br />
+           <br />
+           <div>
+               Adres: <input type="text" name="address" />
+           </div>
+           <br />
+           <br />
+           <div>
+               Bericht: <input type="text" name="message" />
+               @Html.ValidationMessageFor(m => m.Message)
+           </div>
+       </fieldset>
 
-       <input type="submit" value="opslaan" />
+       <input type="reset" value="Reset" />
+       <input type="submit" value="Opslaan" />
    </form>
-     @if(Model!= null)
-     {
-         <p> Hallo @Model.FirstName die achternaam @Model.LastName heeft  </p>
-     }
+
 </div>
