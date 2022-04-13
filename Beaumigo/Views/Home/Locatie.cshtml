@@ -2,14 +2,20 @@
 @{
     ViewData["Title"] = "Locatie";
 }
+
+
 <div class="locatie">
-    <h1> locaties</h1>
-    @foreach (Locatie l in Model)
-    {
-        <p>@l.straatnummer - @l.telefoonnummer - @l.postcode.</p>
-       
+    <ul>
+        @foreach (Locatie l in Model)
+        {
+            <li>
+                <a class="goed" href="/straatnummer/@l.Id">@l.straatnummer</a>
 
-    }
+
+                <br />
+                <br />
+            </li>
+        }
+    </ul>
 </div>
-
 

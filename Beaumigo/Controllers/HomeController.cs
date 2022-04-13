@@ -240,6 +240,43 @@ namespace Beaumigo.Controllers
             return View(locaties);
         }
 
+        [Route("plaats/{id}")]
+        public IActionResult Plaats(string id)
+        {
+            var model = GetPlaats(id);
+            return View(model);
+        }
+
+        private Plaats GetPlaats(string id)
+        {
+            List<Plaats> locatie = new List<Plaats>();
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand($"select * from eten where id = {id}", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Plaats p = new Plaats
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            straatnummer = reader["straatnummer"].ToString(),
+                            postcode = reader["postcode"].ToString(),
+                            telefoonnummer = reader["telefoonnummer"].ToString(),
+
+
+                        };
+                        locatie.Add(p);
+                    }
+                }
+            }
+
+            return locatie[0];
+        }
+
         [Route("login")]
         public IActionResult Login()
         {
