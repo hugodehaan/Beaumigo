@@ -1,11 +1,13 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 body, html {
-    margin: 0;
-    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
-header{
+header {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 70px;
     background-color: #282828;
@@ -117,6 +119,8 @@ header a:hover{
 footer {
     color: #000;
     background: #757573;
+    margin: 0;
+    padding: 0;
 }
 
    footer::after {
@@ -141,7 +145,8 @@ footer h2 {
 }
 
 
-.main{
-    width: 1000px;
+.contact, .eten, .locatie{
+    margin-left: 5%;
+    margin-right: 5%
     
 }

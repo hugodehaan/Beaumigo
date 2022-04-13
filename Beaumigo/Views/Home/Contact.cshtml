@@ -3,7 +3,7 @@
         ViewData["Title"] = "Contact";
  }
 
- <div class="text-center">
+ <div class="contact">
    <h1>Contactformulier</h1>
    <p>Heeft u vragen voor ons. Dan kunt u ons contactformulier invullen</p>
    <form method="post" class="contactform">
@@ -42,7 +42,7 @@
                @Html.ValidationMessageFor(m => m.Message)
            </div>
        </fieldset>
-
+       <br />
        <input type="reset" value="Reset" />
        <input type="submit" value="Opslaan" />
    </form>
