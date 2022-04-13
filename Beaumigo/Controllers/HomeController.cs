@@ -240,7 +240,7 @@ namespace Beaumigo.Controllers
             return View(locaties);
         }
 
-        [Route("plaats/{id}")]
+        [Route("straatnummer/{id}")]
         public IActionResult Plaats(string id)
         {
             var model = GetPlaats(id);
@@ -254,7 +254,7 @@ namespace Beaumigo.Controllers
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand($"select * from eten where id = {id}", conn);
+                MySqlCommand cmd = new MySqlCommand($"select * from locaties where id = {id}", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
