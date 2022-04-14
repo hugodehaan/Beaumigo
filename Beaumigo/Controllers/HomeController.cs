@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Beaumigo.Controllers
 {
@@ -282,8 +284,14 @@ namespace Beaumigo.Controllers
         {
             return View();
         }
-        
-        
+
+        [Route("viernulvier")]
+        public IActionResult viernulvier()
+        {
+            return View();
+        }
+
+
         [Route("succes")]
         public IActionResult Succes()
         {
