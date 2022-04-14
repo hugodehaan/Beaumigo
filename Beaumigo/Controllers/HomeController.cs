@@ -9,6 +9,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Microsoft.AspNetCore.Http;
+using System.Text;
+using System.Security.Cryptography;
+
 
 
 namespace Beaumigo.Controllers
@@ -282,60 +285,81 @@ namespace Beaumigo.Controllers
         [Route("login")]
         public IActionResult Login()
         {
-            return View();
+              return View();
         }
+
+           
+
 
         [Route("viernulvier")]
-        public IActionResult viernulvier()
-        {
-            return View();
-        }
-
-
-        [Route("succes")]
-        public IActionResult Succes()
-        {
-            return View();
-        }
-
-
-
-        private void SavePerson(Person person)
-        {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            public IActionResult viernulvier()
             {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, telefoon, adres, bericht) VALUES(?voornaam, ?achternaam, ?email, ?telefoon, ?adres, ?bericht)", conn);
+                return View();
+            }
 
-                cmd.Parameters.Add("?voornaam", MySqlDbType.Text).Value = person.FirstName;
-                cmd.Parameters.Add("?achternaam", MySqlDbType.Text).Value = person.LastName;
-                cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
-                cmd.Parameters.Add("?telefoon", MySqlDbType.Text).Value = person.Phone;
-                cmd.Parameters.Add("?adres", MySqlDbType.Text).Value = person.Address;
-                cmd.Parameters.Add("?bericht", MySqlDbType.Text).Value = person.Message;
-                cmd.ExecuteNonQuery();
+
+            [Route("succes")]
+            public IActionResult Succes()
+            {
+                return View();
+            }
+
+
+
+            private void SavePerson(Person person)
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, telefoon, adres, bericht) VALUES(?voornaam, ?achternaam, ?email, ?telefoon, ?adres, ?bericht)", conn);
+
+                    cmd.Parameters.Add("?voornaam", MySqlDbType.Text).Value = person.FirstName;
+                    cmd.Parameters.Add("?achternaam", MySqlDbType.Text).Value = person.LastName;
+                    cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
+                    cmd.Parameters.Add("?telefoon", MySqlDbType.Text).Value = person.Phone;
+                    cmd.Parameters.Add("?adres", MySqlDbType.Text).Value = person.Address;
+                    cmd.Parameters.Add("?bericht", MySqlDbType.Text).Value = person.Message;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+
+
+            //  [HttpPost]
+            //   public IActionResult Login(string voornaam, string achternaam)
+            //  {
+            //     ViewData["voornaam"] = voornaam;
+            //     ViewData["achternaam"] = achternaam;
+            //
+            //      return View();
+            // }
+
+
+
+
+            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            public IActionResult Error()
+            {
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+        static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
 
-
-
-        //  [HttpPost]
-        //   public IActionResult Login(string voornaam, string achternaam)
-        //  {
-        //     ViewData["voornaam"] = voornaam;
-        //     ViewData["achternaam"] = achternaam;
-        //
-        //      return View();
-        // }
-
-
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+    }
     }
 }
