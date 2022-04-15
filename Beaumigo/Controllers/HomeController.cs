@@ -111,7 +111,6 @@ namespace Beaumigo.Controllers
                             Allergieen = reader["allergieen"].ToString(),
                             Prijs = reader["prijs"].ToString(),
                             Foto = reader["foto"].ToString(),
-                            Beschrijving = reader["beschrijving"].ToString(),
 
 
                         };

@@ -14,7 +14,6 @@ namespace Beaumigo.Models
 
         public string Allergieen { get; set; }
         public string Prijs { get; set; }
-        public string Beschrijving { get; set; }
         public string Foto { get; set; }
 
 
