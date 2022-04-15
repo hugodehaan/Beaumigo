@@ -6,7 +6,6 @@ html {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: hidden;
     
 }
 
@@ -60,7 +59,7 @@ header a:hover{
 
 // {
     background-size: cover;
-    background-position: left;
+    background-position: center;
     padding: 0;
     margin: 0;
     font-family: monospace;
@@ -71,10 +70,13 @@ header a:hover{
 
 
 .simpleLogin form {
+    margin-top: 3%;
+    margin-left: 38%;
+    margin-bottom: 12%;
     max-width: 400px;
-    margin: auto;
+    position: center;
     background: #fefefd;
-    box-shadow: 0 10px 10px #222;
+    
 }
 
     .simpleLogin form fieldset {
@@ -90,7 +92,7 @@ header a:hover{
         }
 
     .simpleLogin form legend {
-        background-color: fuchsia;
+        background-color: black;
         border-top: 0 none;
         color: white;
         display: table-cell;
@@ -102,13 +104,13 @@ header a:hover{
         width: 90%;
         margin: 10px 0;
         padding: 10px 5%;
-        border: thin fuchsia solid;
+        border: thin black  solid;
     }
 
 .simpleLogin input[type="submit"] {
     width: 100px;
     float: right;
-    background: fuchsia;
+    background: #222;
     color: white;
     transition: .2s;
     border: 0;
@@ -128,7 +130,7 @@ footer {
     border-top-right-radius: 5px;
     color: #000;
     background: #88ae68;
-    padding: 0;
+    height:auto;
 }
 
    footer::after {
@@ -152,6 +154,9 @@ footer h2 {
     margin-left: 50px;
 }
 
+footer h3 {
+    margin-bottom: 8.2%;
+}
 
 .contact, .eten, .locatie{
     margin-left: 5%;
@@ -184,6 +189,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     background: #b6d7a8;
     text-align: center;
     color: #E0E0E0;
