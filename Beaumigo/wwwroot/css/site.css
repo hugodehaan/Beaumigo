@@ -164,6 +164,9 @@ footer h3 {
     
 }
 
+.contact {
+    color: white;
+}
 .Section_top {
     width: 100%;
     height: 100%;
@@ -178,10 +181,22 @@ footer h3 {
 }
 
 .eten li{
-    text-decoration: bold;
     text-align: center;
-
+    list-style-type: none;
 }
+
+.eten a {
+    text-decoration: none;
+    color: white;
+}
+
+.eten a:hover {
+    text-decoration: none;
+    color: #F0c330;
+    transition: 0,5s;
+}
+
+
 
 
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fira+Mono:wght@500&display=swap');
