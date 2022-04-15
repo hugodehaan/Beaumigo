@@ -1,4 +1,5 @@
-﻿using Beaumigo.Models;
+﻿
+using Beaumigo.Models;
 using MySql.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,11 +9,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using Microsoft.AspNetCore.Http;
-using System.Text;
-using System.Security.Cryptography;
-
-
 
 namespace Beaumigo.Controllers
 {
@@ -288,101 +284,51 @@ namespace Beaumigo.Controllers
             return View();
         }
 
-        [Route("login")]
-        [HttpPost]
-        public IActionResult Login(string email, string password)
+
+        [Route("succes")]
+        public IActionResult Succes()
         {
-            {
-                // hash voor "wachtwoord"
-                string hash = "dc00c903852bb19eb250aeba05e534a6d211629d77d055033806b783bae09937";
-
-                // is er een wachtwoord ingevoerd?
-                if (!string.IsNullOrWhiteSpace(password))
-                {
-
-                    //Er is iets ingevoerd, nu kunnen we het wachtwoord hashen en vergelijken met de hash "uit de database"
-                    string hashVanIngevoerdWachtwoord = ComputeSha256Hash(password);
-                    if (hashVanIngevoerdWachtwoord == hash)
-                    {
-                        HttpContext.Session.SetString("User", email);
-                        return Redirect("/");
-                    }
-                }
-                    return View();
+            return View();
         }
 
-           
 
 
-     [Route("viernulvier")]
-     public IActionResult viernulvier()
-      {
-       return View();
-            }
-
-
-    [Route("succes")]
-           public IActionResult Succes()
-            {
-                return View();
-            }
-
-
-
-            private void SavePerson(Person person)
-            {
-
-                // voordat we alles opslaan in de database gaan we eerst het wachtwoord hashen
-                person.Password = ComputeSha256Hash(person.Password);
-
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, telefoon, adres, bericht) VALUES(?voornaam, ?achternaam, ?email, ?telefoon, ?adres, ?bericht)", conn);
-
-                    cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
-                    cmd.Parameters.Add("?wachtwoord", MySqlDbType.Text).Value = person.password;
-                             cmd.ExecuteNonQuery();
-                }
-            }
-
-
-
-            //  [HttpPost]
-            //   public IActionResult Login(string voornaam, string achternaam)
-            //  {
-            //     ViewData["voornaam"] = voornaam;
-            //     ViewData["achternaam"] = achternaam;
-            //
-            //      return View();
-            // }
-
-
-
-
-            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-            public IActionResult Error()
-            {
-                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            }
-        static string ComputeSha256Hash(string rawData)
+        private void SavePerson(Person person)
         {
-            // Create a SHA256   
-            using (SHA256 sha256Hash = SHA256.Create())
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, telefoon, adres, bericht) VALUES(?voornaam, ?achternaam, ?email, ?telefoon, ?adres, ?bericht)", conn);
 
-                // Convert byte array to a string   
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
+                cmd.Parameters.Add("?voornaam", MySqlDbType.Text).Value = person.FirstName;
+                cmd.Parameters.Add("?achternaam", MySqlDbType.Text).Value = person.LastName;
+                cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
+                cmd.Parameters.Add("?telefoon", MySqlDbType.Text).Value = person.Phone;
+                cmd.Parameters.Add("?adres", MySqlDbType.Text).Value = person.Address;
+                cmd.Parameters.Add("?bericht", MySqlDbType.Text).Value = person.Message;
+                cmd.ExecuteNonQuery();
             }
         }
 
-    }
+
+
+        //  [HttpPost]
+        //   public IActionResult Login(string voornaam, string achternaam)
+        //  {
+        //     ViewData["voornaam"] = voornaam;
+        //     ViewData["achternaam"] = achternaam;
+        //
+        //      return View();
+        // }
+
+
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
     }
 }
