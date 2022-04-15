@@ -156,7 +156,7 @@ namespace Beaumigo.Controllers
                             Naam = reader["naam"].ToString(),
                             Prijs = reader["prijs"].ToString(),
                             Foto = reader["foto"].ToString(),
-                            Beschrijving = reader["beschrijving"].ToString(),
+
 
                         };
 
