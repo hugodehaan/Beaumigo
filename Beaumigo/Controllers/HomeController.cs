@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Http;
 
 namespace Beaumigo.Controllers
 {
@@ -26,6 +27,8 @@ namespace Beaumigo.Controllers
 
         public IActionResult Index()
         {
+            ViewData["user"] = HttpContext.Session.GetString("User");
+
             return View();
         }
 
@@ -284,6 +287,16 @@ namespace Beaumigo.Controllers
             return View();
         }
 
+        public IActionResult Login(string username, string password)
+        {
+            if (password == "geheim")
+            {
+                HttpContext.Session.SetString("User", username);
+                return Redirect("/");
+            }
+
+            return View();
+        }
 
         [Route("succes")]
         public IActionResult Succes()
