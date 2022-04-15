@@ -287,7 +287,7 @@ namespace Beaumigo.Controllers
             return View();
         }
 
-        public IActionResult Login(string username, string password)
+        public IActionResult login(string username, string password)
         {
             if (password == "geheim")
             {

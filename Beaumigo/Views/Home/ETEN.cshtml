@@ -7,7 +7,8 @@
         @foreach (Eten g in Model)
         {
             <li>
-                <a class="goed" href="/gerecht/@g.Id">@g.Naam</a>
+                <a class="goed" href="/gerecht/@g.Id">@g.Naam   -€@g.Prijs</a>
+                <p>@g.Ingredienten</p>
                 
 
                 <br />

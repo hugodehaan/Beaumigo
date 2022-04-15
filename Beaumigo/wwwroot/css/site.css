@@ -179,7 +179,8 @@ footer h3 {
 
 .eten li{
     text-decoration: bold;
-    text-align: left;
+    text-align: center;
+
 }
 
 
@@ -229,4 +230,13 @@ svg {
 
 #stars {
     animation: twinkling 2s linear;
+}
+
+.main ul{
+    text-decoration: none;
+    text-align: center;
+    list-style-type: none;
+}
+.main{
+    color: #000
 }
